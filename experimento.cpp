@@ -50,5 +50,11 @@ void imprimir_matriz (const Matrix& M ){
     cout<< "********************"<<endl;
 }
 int main(){ 
+    Matrix A = generar_matriz(10);
+    Matrix B = generar_matriz(10);
+    cout << "Matriz A:" << endl;
+    imprimir_matriz(A);
+    cout << "Matriz B:" << endl;
+    imprimir_matriz(B);
     return 0; 
 }
