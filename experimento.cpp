@@ -40,7 +40,15 @@ Matrix multiply_standard(const Matrix& A, const Matrix& B) {
     return C;
 }
 
+void imprimir_matriz (const Matrix& M ){
+    for(const auto& fila: M){
+        for(int  valor  : fila){
+            cout<< valor << "\t";
+        }
+        cout<<endl; 
+    }
+    cout<< "********************"<<endl;
+}
 int main(){ 
     return 0; 
 }
-
