@@ -35,9 +35,19 @@ Matrix sumar_matrices(const Matrix& A, const Matrix& B){
         }
     }
     return C;
-
 }
 
+//resta de matrices que es parte del algoritmo Strassen
+Matrix restar_matrices(const Matrix& A, const Matrix& B){
+    int n = A.size(); 
+    Matrix C(n, vector<int> (n));
+    for( int i =0; i< n; ++i){
+        for(int j=0; j<n; ++j){
+            C[i][j] = A[i][j] - B[i][j];
+        }
+    }
+    return C;
+}
 
 // algoritmo estandar de multiplicacion de matrices (O(n^3))
 Matrix multiply_standard(const Matrix& A, const Matrix& B) {
@@ -72,8 +82,10 @@ int main(){
     /*Matrix C = multiply_standard(A, B);
     cout << "Matriz C (A x B):" << endl;
     imprimir_matriz(C); */
-    Matrix C = sumar_matrices(A, B);
-    cout << "Matriz C (A + B):" << endl;
+    //Matrix C = sumar_matrices(A, B);
+    //cout << "Matriz C (A + B):" << endl;
+    Matrix C = restar_matrices(A, B);
+    cout << "Matriz C (A - B):" << endl;
     imprimir_matriz(C);
 
     return 0; 
