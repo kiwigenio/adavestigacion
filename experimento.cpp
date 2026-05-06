@@ -77,6 +77,12 @@ void imprimir_matriz (const Matrix& M ){
 Matrix strassen_recursivo(const Matrix& A, const Matrix& B) { 
     int n = A.size();
 
+    if (n == 1) {
+        Matrix C(1, vector<int>(1));
+        C[0][0] = A[0][0] * B[0][0];
+        return C;
+    }
+
     int mitad = n/2; 
     Matrix a11(mitad, vector<int> (mitad)), a12(mitad, vector<int> (mitad)), a21(mitad, vector<int> (mitad)), a22(mitad, vector<int> (mitad));
     Matrix b11(mitad, vector<int> (mitad)), b12(mitad, vector<int> (mitad)), b21(mitad, vector<int> (mitad)), b22(mitad, vector<int> (mitad));
@@ -103,6 +109,15 @@ Matrix strassen_recursivo(const Matrix& A, const Matrix& B) {
     imprimir_matriz(b12);
     imprimir_matriz(b21);
     imprimir_matriz(b22);
+
+    // las 7 operaciones de Strassen
+    Matrix M1 = strassen_recursivo(a11,restar_matrices(b12, b22)); // M1 = a11 * (b12 - b22)
+    Matrix M2 = strassen_recursivo(sumar_matrices(a11, a12), b22); // M2 = (a11 + a12) * b22
+    Matrix M3 = strassen_recursivo(sumar_matrices(a21,a22),b11);
+    Matrix M4 = strassen_recursivo(a22, restar_matrices(b21, b11));
+    Matrix M5 = strassen_recursivo(sumar_matrices(a11, a22), sumar_matrices(b11, b22));
+    Matrix M6 = strassen_recursivo(restar_matrices(a12, a22), sumar_matrices(b21, b22));
+    Matrix M7 = strassen_recursivo(restar_matrices(a11, a21), sumar_matrices(b11, b12));
 
     return A; 
 }
