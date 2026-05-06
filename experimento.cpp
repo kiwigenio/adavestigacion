@@ -136,6 +136,29 @@ Matrix strassen_recursivo(const Matrix& A, const Matrix& B) {
 
     return C; 
 }
+Matrix completar_matriz(const Matrix& A, const Matrix& B){
+    int n = A.size();
+    int m = pow(2,ceil(log2(n)));
+    Matrix A_pad(m, vector<int>(m, 0));
+    Matrix B_pad(m, vector<int>(m, 0));
+
+    for(int i = 0; i <n ; i++){
+        for(int j = 0; j < n; j++){
+            A_pad[i][j] = A[i][j];
+            B_pad[i][j] = B[i][j];
+        }
+    }
+    
+    Matrix C_pad = strassen_recursivo(A_pad, B_pad);
+    Matrix C(n, vector<int>(n));
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            C[i][j] = C_pad[i][j];  
+        }
+    }
+    return C; 
+}
+
 int main(){ 
     cout<< "ingrese el tamaño de la matriz (debe ser potencia de 2): ";
     int size = 0;
@@ -154,6 +177,8 @@ int main(){
     /*Matrix C = restar_matrices(A, B);
     cout << "Matriz C (A - B):" << endl;
     imprimir_matriz(C);*/
-    strassen_recursivo(A, B);
+    Matrix C = strassen_recursivo(A, B);
+    cout<< "Multiplicacion de matrices usando Strassen completada." << endl;
+    imprimir_matriz(C);
     return 0; 
 }
