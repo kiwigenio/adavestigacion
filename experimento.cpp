@@ -113,11 +113,18 @@ Matrix strassen_recursivo(const Matrix& A, const Matrix& B) {
     // las 7 operaciones de Strassen
     Matrix M1 = strassen_recursivo(a11,restar_matrices(b12, b22)); // M1 = a11 * (b12 - b22)
     Matrix M2 = strassen_recursivo(sumar_matrices(a11, a12), b22); // M2 = (a11 + a12) * b22
-    Matrix M3 = strassen_recursivo(sumar_matrices(a21,a22),b11);
-    Matrix M4 = strassen_recursivo(a22, restar_matrices(b21, b11));
-    Matrix M5 = strassen_recursivo(sumar_matrices(a11, a22), sumar_matrices(b11, b22));
-    Matrix M6 = strassen_recursivo(restar_matrices(a12, a22), sumar_matrices(b21, b22));
-    Matrix M7 = strassen_recursivo(restar_matrices(a11, a21), sumar_matrices(b11, b12));
+    Matrix M3 = strassen_recursivo(sumar_matrices(a21,a22),b11); // M3 = (a21 + a22) * b11
+    Matrix M4 = strassen_recursivo(a22, restar_matrices(b21, b11)); // M4 = a22 * (b21 - b11)
+    Matrix M5 = strassen_recursivo(sumar_matrices(a11, a22), sumar_matrices(b11, b22)); //  M5 = (a11 + a22) * (b11 + b22)
+    Matrix M6 = strassen_recursivo(restar_matrices(a12, a22), sumar_matrices(b21, b22)); // M6 = (a12 - a22) * (b21 + b22)
+    Matrix M7 = strassen_recursivo(restar_matrices(a11, a21), sumar_matrices(b11, b12)); // M7 = (a11 - a21) * (b11 + b12)
+
+    Matrix c11 = sumar_matrices(restar_matrices(sumar_matrices(M5,M4), M2), M6);
+    Matrix c12 = sumar_matrices(M1, M2);
+    Matrix c21 = sumar_matrices(M3, M4);
+    Matrix c22 = restar_matrices(restar_matrices(sumar_matrices(M5,M1), M3), M7);
+
+    
 
     return A; 
 }
