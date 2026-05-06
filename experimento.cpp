@@ -124,9 +124,17 @@ Matrix strassen_recursivo(const Matrix& A, const Matrix& B) {
     Matrix c21 = sumar_matrices(M3, M4);
     Matrix c22 = restar_matrices(restar_matrices(sumar_matrices(M5,M1), M3), M7);
 
-    
+    Matrix C(n, vector<int> (n)); 
+    for(int i = 0; i< mitad; ++i){
+        for(int j = 0; j<mitad; ++j){ 
+            C[i][j] = c11[i][j];
+            C[i][j + mitad] = c12[i][j];
+            C[i + mitad][j] = c21[i][j];
+            C[i + mitad][j + mitad] = c22[i][j];
+        }
+    }    
 
-    return A; 
+    return C; 
 }
 int main(){ 
     cout<< "ingrese el tamaño de la matriz (debe ser potencia de 2): ";
