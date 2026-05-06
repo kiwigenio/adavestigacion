@@ -2,7 +2,7 @@
 CXX = g++
 CXXFLAGS = -O3 -march=native -Wall
 TARGET = experimento
-SRCS = experimento.cpp funciones_strassen.cpp
+SRCS = experimento.cpp funciones_strassen.cpp laboratorio_pruebas.cpp
 OBJS = $(SRCS:.cpp=.o)
 # regla que se ejecuta al escribir make 
 all: $(TARGET)
