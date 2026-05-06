@@ -2,15 +2,18 @@
 CXX = g++
 CXXFLAGS = -O3 -march=native -Wall
 TARGET = experimento
-SRC = experimento.cpp
-
+SRCS = experimento.cpp funciones_strassen.cpp
+OBJS = $(SRCS:.cpp=.o)
 # regla que se ejecuta al escribir make 
 all: $(TARGET)
 
 # regla del ejecutable 
-$(TARGET): $(SRC)
-	$(CXX) $(CXXFLAGS) $(SRC) -o $(TARGET)
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(TARGET)
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # limpiar archivos generados
 clean:
-	rm -f $(TARGET) resultados_tiempos.csv
+	rm -f $(OBJS) $(TARGET)
