@@ -72,9 +72,46 @@ void imprimir_matriz (const Matrix& M ){
     }
     cout<< "********************"<<endl;
 }
+
+//algoritmos Strassen  
+Matrix strassen_recursivo(const Matrix& A, const Matrix& B) { 
+    int n = A.size();
+
+    int mitad = n/2; 
+    Matrix a11(mitad, vector<int> (mitad)), a12(mitad, vector<int> (mitad)), a21(mitad, vector<int> (mitad)), a22(mitad, vector<int> (mitad));
+    Matrix b11(mitad, vector<int> (mitad)), b12(mitad, vector<int> (mitad)), b21(mitad, vector<int> (mitad)), b22(mitad, vector<int> (mitad));
+
+    for (int i = 0; i< mitad; ++i){
+        for(int j = 0; j<mitad; ++j){
+            a11[i][j] = A[i][j];
+            a12[i][j] = A[i][j + mitad];
+            a21[i][j] = A[i + mitad][j];
+            a22[i][j] = A[i + mitad][j + mitad];
+
+            b11[i][j] = B[i][j];
+            b12[i][j] = B[i][j + mitad];
+            b21[i][j] = B[i + mitad][j];
+            b22[i][j] = B[i + mitad][j + mitad];
+        }
+    }
+    cout<< "Submatrices a11, a12, a21, a22, b11, b12, b21, b22 creadas." << endl;
+    imprimir_matriz(a11);
+    imprimir_matriz(a12);  
+    imprimir_matriz(a21);
+    imprimir_matriz(a22);
+    imprimir_matriz(b11);
+    imprimir_matriz(b12);
+    imprimir_matriz(b21);
+    imprimir_matriz(b22);
+
+    return A; 
+}
 int main(){ 
-    Matrix A = generar_matriz(3);
-    Matrix B = generar_matriz(3);
+    cout<< "ingrese el tamaño de la matriz (debe ser potencia de 2): ";
+    int size = 0;
+    cin>> size;
+    Matrix A = generar_matriz(size);
+    Matrix B = generar_matriz(size);
     cout << "Matriz A:" << endl;
     imprimir_matriz(A);
     cout << "Matriz B:" << endl;
@@ -84,9 +121,9 @@ int main(){
     imprimir_matriz(C); */
     //Matrix C = sumar_matrices(A, B);
     //cout << "Matriz C (A + B):" << endl;
-    Matrix C = restar_matrices(A, B);
+    /*Matrix C = restar_matrices(A, B);
     cout << "Matriz C (A - B):" << endl;
-    imprimir_matriz(C);
-
+    imprimir_matriz(C);*/
+    strassen_recursivo(A, B);
     return 0; 
 }
