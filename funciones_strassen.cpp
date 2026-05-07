@@ -68,11 +68,14 @@ void imprimir_matriz (const Matrix& M ){
 Matrix strassen_recursivo(const Matrix& A, const Matrix& B) { 
     int n = A.size();
 
-    if (n == 1) {
+    /*if (n == 1) {
         Matrix C(1, vector<int>(1));
         C[0][0] = A[0][0] * B[0][0];
         return C;
-    }
+    }*/
+   if (n <= 32) { 
+        return multiply_standard(A, B);
+   }
 
     int mitad = n/2; 
     Matrix a11(mitad, vector<int> (mitad)), a12(mitad, vector<int> (mitad)), a21(mitad, vector<int> (mitad)), a22(mitad, vector<int> (mitad));
