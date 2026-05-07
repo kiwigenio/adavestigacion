@@ -6,8 +6,8 @@ using namespace std;
 
 Matrix generar_matriz(int n) {
     Matrix M(n, vector<int>(n));
-    random_device rd;
-    mt19937 gen(rd());
+    //random_device rd;
+    mt19937 gen(42);
     uniform_int_distribution<> dis(1, 10);
 
     for (int i = 0; i < n; ++i)
@@ -91,15 +91,15 @@ Matrix strassen_recursivo(const Matrix& A, const Matrix& B) {
             b22[i][j] = B[i + mitad][j + mitad];
         }
     }
-    cout<< "Submatrices a11, a12, a21, a22, b11, b12, b21, b22 creadas." << endl;
-    imprimir_matriz(a11);
+    //cout<< "Submatrices a11, a12, a21, a22, b11, b12, b21, b22 creadas." << endl;
+    /*imprimir_matriz(a11);
     imprimir_matriz(a12);  
     imprimir_matriz(a21);
     imprimir_matriz(a22);
     imprimir_matriz(b11);
     imprimir_matriz(b12);
     imprimir_matriz(b21);
-    imprimir_matriz(b22);
+    imprimir_matriz(b22);*/
 
     // las 7 operaciones de Strassen
     Matrix M1 = strassen_recursivo(a11,restar_matrices(b12, b22)); // M1 = a11 * (b12 - b22)
